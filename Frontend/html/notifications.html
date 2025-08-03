@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification</title>
+</head>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+  body{
+    font-family:"Inter", sans-serif;
+  }
+</style>
+<body>
+    <script>
+      function loadNotifications(){
+        fetch('/Authentication/backend/get-notifications.php')
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) {
+          console.log(data.error);
+        }else if(!data.length){
+          document.createElement('p').innerHTML = 'No notification has been sent to you yet.';
+        } else {
+          data.forEach(note => {
+            // Example: Display each notification
+            const box = document.createElement('div');
+            box.innerHTML = `
+              <p>${note.message}</p>
+              <small>${new Date(note.created_at).toLocaleString()}</small>
+              <hr/>
+            `;
+            document.body.appendChild(box);
+          });
+        }
+      });
+    }
+    loadNotifications();
+    setInterval(loadNotifications, 2000);
+
+    </script>
+</body>
+</html>
+<!-- if(!applications.length){
+  document.getElementById('admin-notification-container').innerHTML = 'No Application from any one at the moment';
+  return;
+} -->

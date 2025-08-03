@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications</title>
+</head>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+  body {
+    background: #F3F3F3;
+    font-family: "Inter", sans-serif;
+    /* color: #333; */
+  }
+</style>
+<body>
+    <div id="admin-notification-container">
+        
+    </div>
+    <script>
+        function fetchAdminApplications() {
+    fetch('/Authentication/backend/application.php')
+    .then(res => res.json())
+    .then(applications => {
+      if(!applications.length){
+         document.getElementById('admin-notification-container').innerHTML = 'No Application from any one at the moment';
+         return;
+      }
+    
+      const container = document.getElementById('admin-notification-container');
+      container.innerHTML = '';
+
+      applications.forEach(app => {
+        const card = document.createElement('div');
+        card.style.borderBottom = '1px solid #ccc';
+        card.style.padding = '10px';
+        card.innerHTML = `
+          <p><strong>${app.name}</strong> applied for <em>${app.title}</em></p>
+          <p>Status: ${app.status}</p>
+          <p>Applied At: ${new Date(app.applied_at).toLocaleString()}</p>
+          <button onclick="approveApplication(${app.application_id}, ${app.user_id}, ${app.house_id})">Approve</button>
+          <button onclick="rejectApplication(${app.application_id}, ${app.user_id})">Reject</button>
+        `;
+        container.appendChild(card);
+      });
+    });
+}
+
+ function approveApplication(applicationId, userId, houseId){
+  fetch(`/Authentication/backend/approve-application.php`,{
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({application_id: applicationId, user_id: userId, house_id: houseId})
+  }).then(res => res.text())
+    .then(message => {
+      alert(message)
+      fetchAdminApplications();
+    })
+    .catch(err =>{
+      console.error(err)
+      alert('error approving application')
+    });
+ }
+
+ function rejectApplication(applicationId, userId){
+  fetch(`/Authentication/backend/reject-application.php`,{
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({application_id: applicationId, user_id: userId})
+  }).then(res => res.text())
+    .then(message => {
+      alert(message)
+      fetchAdminApplications();
+    })
+    .catch(err =>{
+      console.error(err)
+      alert('error rejecting application')
+    })
+ }
+
+document.addEventListener('DOMContentLoaded', fetchAdminApplications);
+setInterval(fetchAdminApplications, 2000)
+
+    </script>
+</body>
+</html>

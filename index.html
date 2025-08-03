@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/Authentication/Frontend/css/home-page.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h3 class="logo">La Maison<i class="fa-solid fa-house"></i></h3>
+            <!-- <nav>
+                
+                
+            </nav> -->
+       <a href="/Authentication/Frontend/php/index.php" class="find-house-link">Find Houses</a>
+        </header>
+        
+        <div class="hero-text">
+            <h1>Find A House That Suits You</h1>
+            <div class="search-container">
+                <input type="text" placeholder="Search..." id="searchInput">
+                <button id="search-btn">Find Your <i class="fa-solid fa-house"></i></button>
+            </div>
+        </div>
+    </div>
+    <section class="house-section">
+        <h2>Discover Our Featured Properties</h2>
+        <p>Find your next home from a curated list of verified and affordable rental properties</p>
+        <div id="house-list" class="house-list"></div>
+    </section>
+    <section class="why-choose-us">
+        <h2>Why Choose Us / What We Offer</h2>
+        <div class="service-text">
+            <p>At La Maison <i class="fa-solid fa-house"></i>, we simplify the rental process by combining verified property listings with a smooth booking experience and easy communications with our admins and landlords. Wether you are looking for a new apartment, a temporary place to stay, our platform ensures every listing is authenticated and up to date. with instant application and booking Features. You can rent confidently with us!</p>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h2 class="footer-logo">La Maison<i class="fa-solid fa-house"></i></h2>
+                <p>Rent with us today!</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="/Authentication/Frontend/php/index.php">Login</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact
+                    
+                </h3>
+                <p>Email: lamaison@gmail.com
+                  
+                </p>
+                <p>Phone: +2347016011109</p>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy 2025 YourRentalApp. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/Authentication/Frontend/js/fetch-house.js"></script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add House</title>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+            box-sizing:border-box;
+        }
+        body{
+            background-color: #edeaea;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container{
+         width: 100%;
+         max-width:400px;
+         margin: 20px auto;
+        }
+        form{
+            background-color: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border-radius: 13px;
+            padding: 30px;
+        }
+        form input, textarea{
+            width:100%;
+            padding:12px 15px;
+            border:1px solid #cfcfcfe0;
+            border-radius: 9px;
+            margin-bottom:20px;
+            font-size:15px;
+        }
+        form button{
+            width:100%;
+            background-color: #7A5AF8;
+            padding: 10px 10px;
+            text-decoration: none;
+            color:white;
+            border:none;
+            border-radius: 5px;
+        }
+        h2{
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        @media (max-width:480px){
+            form{
+                padding: 20px;
+            }
+            .container{
+                padding:0 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+   <div class="container">
+   
+    <form id="houseForm" enctype="multipart/form-data">
+        <h2>Add House</h2>
+        <input type="text" name="title" placeholder="House Title" required><br>
+        <input type="text" name="location" placeholder="Location" required><br>
+        <input type="number" name="price" placeholder="Price" required><br>
+        <textarea name="description"></textarea>
+        <input type="file" name="image" accept="image/*" required><br>
+        <button type="submit">Upload House</button>
+        </form>
+
+        <div id="msg"></div>
+   </div>
+        <script src="/Authentication/Frontend/js/add-house.js
+        "></script> 
+</body>
+</html>

@@ -1,0 +1,100 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+h1,h2,h3,h4,h5 {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+  }
+  
+p,a,button {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+  }
+
+#house-details{
+    background-color: #f9fcfb;
+    padding:40px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+}
+.card h3{
+    font-size:16px;
+    
+}
+.card .price{
+    font-size:18px;
+    color:#e07a5f;
+    font-weight:bold;
+    /* margin-bottom: 10px; */
+}
+.card  .flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom:20px;
+}
+.card{
+    background-color: #fff;
+    /* padding: 10px; */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow:hidden;
+    transition: transform 0.3s ease;
+border-radius: 12px;
+}
+.card-content{
+    padding: 15px;
+}
+
+.img-container{
+    overflow:hidden;
+}
+.img-container img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .5s ease;
+    overflow: hidden;
+}
+.house-card img:hover{
+    transform: scale(1.1);
+    overflow: hidden;
+}
+.buttons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin:20px;
+}
+.details .desc{
+    margin: 10px 0;
+    font-size:14px;
+    letter-spacing: 1px;
+    line-height: 20px;
+}
+.details .landlord{
+    font-size:16px;
+    margin: 15px 0;
+    letter-spacing: 1px;
+   
+}
+.buttons button{
+    border-radius: 10px;
+    border:none;
+    padding: 12px 15px;
+
+    font-size: 16px;
+    background-color: #00356B;
+    color: white;
+}

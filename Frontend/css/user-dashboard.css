@@ -1,0 +1,212 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+body{
+    height:100%;
+    background-color: #F3F3F3;
+    overflow:hidden;
+    font-family:"Inter", sans-serif;
+
+}
+.container{
+    display:flex;
+    height:100vh;
+}
+.sidebar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:220px;
+    background:white;
+    height:100vh;
+    padding:20px;
+    z-index:1000;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    bottom:0;
+    border-right: 1px solid #eee;
+}
+nav{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+nav a{
+    margin-bottom: 15px;
+    font-size: 16px;
+    display: block;
+    text-decoration: none;
+    color: #000000;
+    font-weight: 550;
+    transition: all .5s;
+}
+nav a:hover{
+    color:#ffeaf1;
+}
+.other-links{
+    display:flex;
+    gap:15px;
+}
+.other-links a{
+    margin-bottom: 15px;
+    font-size: 16px;
+    display: block;
+    text-decoration: none;
+    color: #000000;
+    font-weight: 600;
+    transition: all .5s;
+}
+.other-links a:hover{
+    color:#ffeaf1;
+}
+.main{
+    flex: 1;
+    position:relative;
+    /* padding: 10px; */
+    margin-left:220px;
+    overflow-y: auto;
+    box-sizing:border-box;
+    height:100vh; 
+    background:linear-gradient(to right , #fff, #ffeaf1);
+}
+header{
+    background: #fff;
+    padding: 10px;
+    /* border-radius: 10px; */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    /* margin-bottom: 20px; */
+    width:100%;
+   
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:center;
+}
+.search-container #searchInput{
+    
+    padding: 10px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+.search-container{
+    background-color:white;
+    border-radius: 20px;
+   padding: 5px 5px;
+    display:flex;
+    gap: 2vw;
+    align-items:center;
+}
+header button{
+    background-color: #fdc3d7;
+    padding: 5px 10px;
+    text-decoration: none;
+    color:white;
+    border:none;
+    border-radius: 5px;
+}
+
+.house-section{
+    
+    padding: 10px 15px;
+    
+    text-align:center;
+    
+}
+.house-list{
+    display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+}
+.house-card{
+    background-color: #fff;
+    /* padding: 10px; */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow:hidden;
+    transition: transform 0.3s ease;
+    border-radius: 12px;
+    padding:10px;
+}
+.image-container{
+    overflow:hidden;
+}
+.house-card img{
+    border-radius: 12px;
+    width: 100%;
+    height: 150px;
+     object-fit: cover;
+     transition: transform .5s ease;
+     overflow: hidden;
+ }
+ .house-card img:hover{
+    transform: scale(1.1);
+    overflow: hidden;
+}
+.details{
+    font-size:12px;
+    margin-bottom: 10px;
+    /* margin-top:10px; */
+}
+.card-contents{
+    padding: 5px;
+}
+.card-contents h3{
+    font-size:14px;
+    margin-right: 10px; 
+}
+.card-contents .price{
+    font-size:14px;
+    color:#000000;
+    font-weight:bold;
+    /* margin-bottom: 10px; */
+}
+.card-contents .flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom:20px;
+}
+.card-contents a{
+    margin:10px;
+    text-decoration: none;
+    color: black;
+}
+#menubutton{
+    display: none;
+}
+@media (max-width: 768px) {
+    #menubutton{
+        display: block;
+    }
+
+    .sidebar {
+    position:fixed;
+    left:-100%;
+    transition: left ease 0.3s;
+    }
+    .sidebar.active{
+      left:0;
+    }
+    .main{
+      margin-left:0;
+      
+    }
+    header{
+        display:flex;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+  .text{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+   
+  }
+/* @media (max-width:280px) */

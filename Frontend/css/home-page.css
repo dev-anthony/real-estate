@@ -1,0 +1,275 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+h1,h2,h3,h4,h5 {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+  }
+  
+p,a,button {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+  }
+.container{
+    background-image: url(/Authentication/assets/pexels-curtis-adams-1694007-6510949.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 90vh;
+    width: 100%;
+    display:flex;
+    flex-direction: column;
+    padding:8px ;
+    /* padding: 10px; */
+}
+@media (max-width:768px){
+    header h3{
+        color:white;
+        font-size:18px;
+    }
+    .hero-text h1{
+        font-size:1.5rem;
+    }
+    .container{
+       
+        padding:5px 10px;
+        /* padding: 10px; */
+    }
+}
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width:100%;
+}
+.logo{
+    color:white;
+    font-size:1.5rem;
+}
+nav a{
+    text-decoration: none;
+    color: white;
+    margin:0px 10px;
+}
+.find-house-link{
+    text-decoration: none;
+    color:white;
+    border-radius:12px;
+    padding: 7px 13px;
+    border: 1.5px solid white;
+}
+.hero-text{
+ text-align: center;
+ margin: auto;
+}
+.hero-text h1{
+    margin-bottom: 10px;
+    color: white;
+}
+.search-container{
+    background-color:white;
+    border-radius: 20px;
+   padding: 5px 5px;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+}
+.search-container input{
+    border:none;
+    background-color: transparent;
+    padding:0px 20px;
+    outline:none;
+    margin-right: 20px;
+    font-size: 14px;
+}
+.search-container button{
+    border-radius: 15px;
+    border:none;
+    padding: 7px 15px;
+    margin-left: 10px;
+    font-size: 14px;
+    background-color: #00356B;
+    color: white;
+}
+/* house section */
+
+
+.house-section{
+    background-color: #f9fcfb;
+    padding:40px 20px;
+    margin-bottom: 20px;
+    text-align:center;
+    
+
+}
+/* .house-section h2{
+    font-size:2rem;
+    
+    color:#000000;
+} */
+.house-section h2{
+    font-size: 2rem;
+    margin-bottom: 10px;
+   color:#333; 
+}
+.house-section p{
+    color:#666;
+    font-size:12px;
+    margin-bottom: 30px;
+}
+.house-list{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap:24px;
+    justify-content: center;
+    align-items: stretch;
+    overflow: hidden;
+}
+.house-card{
+    background-color: #fff;
+    /* padding: 10px; */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow:hidden;
+    transition: transform 0.3s ease;
+border-radius: 12px;
+}
+
+.image-container{
+    overflow:hidden;
+}
+.details{
+    font-size:12px;
+    /* margin-top:10px; */
+}
+ /* .house-card:hover{
+    transform: translateY(-5px);
+}  */
+
+.house-card img{
+   width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform .5s ease;
+    overflow: hidden;
+}
+.house-card img:hover{
+    transform: scale(1.1);
+    overflow: hidden;
+}
+.card-contents{
+    padding: 15px;
+}
+.card-contents h3{
+    font-size:16px;
+    
+}
+.card-contents .price{
+    font-size:18px;
+    color:#e07a5f;
+    font-weight:bold;
+    /* margin-bottom: 10px; */
+}
+.card-contents .flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom:20px;
+}
+.card-contents a{
+    margin-bottom:10px;
+    text-decoration: none;
+    color: black;
+}
+ .why-choose-us{
+    display:flex;
+    flex-direction: column;
+    margin-top:10px;
+    padding:20px 20px;
+    gap:1em;
+    justify-content: center;
+    align-items:center;
+    text-align:center;
+    
+ }
+ .service-text {
+padding:10px;
+ }
+ .service-text p{
+    line-height: 25px;
+    color:#666;
+    font-size:16px;
+ }
+ footer{
+    background-color:#111;
+    color:#fff;
+    padding:40px 20px 20px;
+ }
+ .footer-container{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content:space-between;max-width:1200px;
+    margin:auto;
+    gap:2em;
+
+}
+.footer-column{
+    flex:1 1 250px;
+
+}
+.footer-logo{
+    font-size: 24px;
+    font-weight:bold;
+    margin-bottom: 10px;
+}
+.footer-column h3{
+    font-size: 18px;
+    margin-bottom:10px;
+}
+.footer-column ul li{
+    list-style-type:none;
+    margin-bottom:8px;
+}
+.footer-column ul li a{
+    text-decoration:none;
+    color:#fff;
+    font-size:15px;
+}
+.footer-column p{
+    margin-top:10px;
+}
+.footer-bottom{
+    display: flex;
+    justify-content: center;
+    margin-top:20px;
+    border-top: 1px solid #333;
+    padding-top:10px;
+    font-size:14px;
+    
+}
+.footer-bottom p{
+    text-align: center;
+}
+@media (max-width:768px){
+    .container{
+        background-image: url(/Authentication/assets/pexels-curtis-adams-1694007-6510949.jpg);
+        background-position:left;
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 90vh;
+        width: 100%;
+        display:flex;
+        flex-direction: column;
+        padding:8px ;
+        /* padding: 10px; */
+    }
+    }
+}
