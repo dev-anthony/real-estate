@@ -15,7 +15,7 @@
             <a href="">Dashboard</a>
             <a href="/Authentication/Frontend/php/admin-inbox.php">Messages</a>
             <a href="/Authentication/Frontend/html/notifications.html">Notifications</a>
-            <a href="">Review</a>
+            <a href="/Authentication/Frontend/html/review.html">Review / Feedback</a>
             <a href="">About</a>
         </nav>
         <div class="other-links">

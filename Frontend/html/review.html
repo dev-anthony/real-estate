@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+</head>
+<body>
+    <h2>Leave Your Feedback</h2>
+    <form id="feedback-form">
+        <textarea id="message" placeholder="Write your feedback..." required></textarea><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <p id="feedback-status"></p>
+
+    <h2>User Feedback</h2>
+    <div id="feedback-display">
+
+    </div>
+
+<script>
+document.getElementById('feedback-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const message = document.getElementById('message').value;
+
+  fetch('/Authentication/backend/SubmitFeedback.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message })
+  })
+  .then(res => res.json())
+  .then(data => {
+    const status = document.getElementById('feedback-status');
+    if (data.success) {
+      status.textContent = 'Feedback submitted successfully!';
+      document.getElementById('feedback-form').reset();
+    } else {
+      status.textContent = 'Error: ' + (data.error || 'Something went wrong.');
+    }
+  })
+  .catch(err => {
+    console.error(err);
+    document.getElementById('feedback-status').textContent = 'Network error.';
+  });
+});
+//display feedback
+function getFeedback(){
+    fetch('/Authentication/backend/getFeedback.php')
+  .then(res => res.json())
+  .then(data => {
+    const container = document.getElementById('feedback-display');
+    container.innerText = '';
+
+    if (data.length === 0) {
+      container.innerHTML = '<p>No feedback yet.</p>';
+      return;
+    }
+
+    data.forEach(item => {
+      const feedbackCard = document.createElement('div');
+      feedbackCard.style.border = '1px solid #ddd';
+      feedbackCard.style.padding = '10px';
+      feedbackCard.style.marginBottom = '10px';
+      feedbackCard.style.borderRadius = '5px';
+
+      feedbackCard.innerHTML = `
+        <strong>${item.name}</strong> 
+        <small style="color:gray;">${new Date(item.created_at).toLocaleString()}</small>
+        <p>${item.message}</p>
+      `;
+
+      container.appendChild(feedbackCard);
+    });
+  })
+  .catch(error => {
+    console.log('Failed to fetch feedback:', error);
+   const err = document.getElementById('feedback-display')
+   err.innerText = 'Unable to load feedback.';
+  });
+
+}
+getFeedback();
+setInterval(getFeedback, 1000);
+</script>
+</body>
+</html>

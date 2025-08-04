@@ -12,6 +12,7 @@
   }
 </style>
 <body>
+  <div id="notification-div"></div>
     <script>
       function loadNotifications(){
         fetch('/Authentication/backend/get-notifications.php')
@@ -22,6 +23,8 @@
         }else if(!data.length){
           document.createElement('p').innerHTML = 'No notification has been sent to you yet.';
         } else {
+         const notificationDiv =  document.getElementById('notification-div')
+         notificationDiv.innerHTML = "";
           data.forEach(note => {
             // Example: Display each notification
             const box = document.createElement('div');
@@ -30,7 +33,7 @@
               <small>${new Date(note.created_at).toLocaleString()}</small>
               <hr/>
             `;
-            document.body.appendChild(box);
+           notificationDiv.appendChild(box);
           });
         }
       });
