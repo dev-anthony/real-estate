@@ -4,85 +4,214 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedback</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 15px;
+            background: #f9f9f9;
+            max-width: 900px;
+            margin-inline: auto;
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        /* Form styling */
+        #feedback-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        #feedback-form textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            resize: vertical;
+            min-height: 100px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+        #feedback-form textarea:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        #feedback-form button {
+            padding: 12px 15px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease, transform 0.2s ease;
+            align-self: flex-start;
+        }
+        #feedback-form button:hover {
+            background: #0056b3;
+            transform: translateY(-1px);
+        }
+
+        /* Feedback list */
+        .feedback-card {
+            background: white;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .feedback-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            gap: 8px;
+        }
+
+        .feedback-header strong {
+            font-size: 1rem;
+        }
+
+        .feedback-header small {
+            display: block;
+            font-size: 0.85rem;
+            color: gray;
+        }
+
+        .delete-btn {
+            background: crimson;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+        .delete-btn:hover {
+            background: darkred;
+            transform: scale(1.05);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            .feedback-card {
+                padding: 12px;
+            }
+            .feedback-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            #feedback-form button {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
     <h2>Leave Your Feedback</h2>
     <form id="feedback-form">
-        <textarea id="message" placeholder="Write your feedback..." required></textarea><br>
+        <textarea id="message" placeholder="Write your feedback..." required></textarea>
         <button type="submit">Submit</button>
     </form>
-
     <p id="feedback-status"></p>
 
     <h2>User Feedback</h2>
-    <div id="feedback-display">
-
-    </div>
+    <div id="feedback-display"></div>
 
 <script>
 document.getElementById('feedback-form').addEventListener('submit', function(e) {
-  e.preventDefault();
+    e.preventDefault();
+    const message = document.getElementById('message').value;
 
-  const message = document.getElementById('message').value;
-
-  fetch('/Authentication/backend/SubmitFeedback.php', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ message })
-  })
-  .then(res => res.json())
-  .then(data => {
-    const status = document.getElementById('feedback-status');
-    if (data.success) {
-      status.textContent = 'Feedback submitted successfully!';
-      document.getElementById('feedback-form').reset();
-    } else {
-      status.textContent = 'Error: ' + (data.error || 'Something went wrong.');
-    }
-  })
-  .catch(err => {
-    console.error(err);
-    document.getElementById('feedback-status').textContent = 'Network error.';
-  });
-});
-//display feedback
-function getFeedback(){
-    fetch('/Authentication/backend/getFeedback.php')
-  .then(res => res.json())
-  .then(data => {
-    const container = document.getElementById('feedback-display');
-    container.innerText = '';
-
-    if (data.length === 0) {
-      container.innerHTML = '<p>No feedback yet.</p>';
-      return;
-    }
-
-    data.forEach(item => {
-      const feedbackCard = document.createElement('div');
-      feedbackCard.style.border = '1px solid #ddd';
-      feedbackCard.style.padding = '10px';
-      feedbackCard.style.marginBottom = '10px';
-      feedbackCard.style.borderRadius = '5px';
-
-      feedbackCard.innerHTML = `
-        <strong>${item.name}</strong> 
-        <small style="color:gray;">${new Date(item.created_at).toLocaleString()}</small>
-        <p>${item.message}</p>
-      `;
-
-      container.appendChild(feedbackCard);
+    fetch('/Authentication/backend/SubmitFeedback.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message })
+    })
+    .then(res => res.json())
+    .then(data => {
+        const status = document.getElementById('feedback-status');
+        if (data.success) {
+            status.textContent = '✅ Feedback submitted successfully!';
+            document.getElementById('feedback-form').reset();
+            getFeedback();
+        } else {
+            status.textContent = '❌ ' + (data.error || 'Something went wrong.');
+        }
+    })
+    .catch(() => {
+        document.getElementById('feedback-status').textContent = 'Network error.';
     });
-  })
-  .catch(error => {
-    console.log('Failed to fetch feedback:', error);
-   const err = document.getElementById('feedback-display')
-   err.innerText = 'Unable to load feedback.';
-  });
+});
 
+function getFeedback() {
+    fetch('/Authentication/backend/getFeedback.php')
+    .then(res => res.json())
+    .then(data => {
+        const container = document.getElementById('feedback-display');
+        container.innerHTML = '';
+
+        if (data.length === 0) {
+            container.innerHTML = '<p>No feedback yet.</p>';
+            return;
+        }
+
+        data.forEach(item => {
+            const feedbackCard = document.createElement('div');
+            feedbackCard.classList.add('feedback-card');
+            feedbackCard.setAttribute('data-id', item.id);
+
+            feedbackCard.innerHTML = `
+                <div class="feedback-header">
+                    <div>
+                        <strong>${item.name}</strong> 
+                        <small>${new Date(item.created_at).toLocaleString()}</small>
+                    </div>
+                    <button class="delete-btn" onclick="deleteFeedback(${item.id})">Delete</button>
+                </div>
+                <p>${item.message}</p>
+            `;
+
+            container.appendChild(feedbackCard);
+        });
+    })
+    .catch(() => {
+        document.getElementById('feedback-display').innerHTML = 'Unable to load feedback.';
+    });
 }
+
+function deleteFeedback(id) {
+    if (!confirm('Are you sure you want to delete this feedback?')) return;
+
+    const formData = new FormData();
+    formData.append('id', id);
+
+    fetch('/Authentication/backend/delete-feedback.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(() => {
+        document.querySelector(`.feedback-card[data-id="${id}"]`)?.remove();
+    })
+    .catch(() => alert('Delete failed.'));
+}
+
 getFeedback();
-setInterval(getFeedback, 1000);
+setInterval(getFeedback, 5000);
 </script>
 </body>
 </html>

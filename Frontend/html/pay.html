@@ -1,11 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pay</title>
+  <meta charset="UTF-8">
+  <title>Pay Now</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: #333;
+    }
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      color: #555;
+    }
+    #payButton {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    #payButton:hover {
+      background-color: #218838;
+    }
+  </style>
 </head>
 <body>
-    <div>Not available at the moment!</div>
+  <h2 id="property-title"></h2>
+  <p id="amount"></p>
+  <button id="payButton">Pay Now</button>
+
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const houseId = params.get('id');
+
+    // Fetch property details from backend
+    fetch(`/Authentication/backend/get-house-details.php?id=${houseId}`, { credentials: 'include' })
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) {
+          document.body.innerHTML = `<p>${data.error}</p>`;
+          return;
+        }
+
+        document.getElementById('property-title').textContent = `Payment for ${data.title}`;
+        document.getElementById('amount').textContent = `₦${data.price}`;
+
+        // Fetch logged-in user's email
+        fetch('/Authentication/backend/get-anyuser-info.php', { credentials: 'include' })
+          .then(res => res.json())
+          .then(user => {
+            const amountKobo = data.price * 100;
+            const userEmail = user.user_email;
+
+            document.getElementById('payButton').addEventListener('click', function () {
+              let handler = PaystackPop.setup({
+                key: 'pk_test_33839fa7383974a861ad81c4498eaf7a28f0053b', // Your PUBLIC key
+                email: userEmail,
+                amount: amountKobo,
+                currency: 'NGN',
+                ref: `HOUSE_${houseId}_${Math.floor(Math.random() * 1000000000 + 1)}`,
+                onClose: function(){
+                  alert('Transaction was not completed.');
+                },
+                callback: function(response){
+                  window.location.href = `/Authentication/backend/verify-payment.php?reference=${response.reference}&house_id=${houseId}`;
+                }
+              });
+              handler.openIframe();
+            });
+          });
+      });
+  </script>
 </body>
 </html>

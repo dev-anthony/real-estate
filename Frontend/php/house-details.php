@@ -86,7 +86,7 @@
         };
       });
       function pay(){
-        window.location.href = "/Authentication/Frontend/html/pay.html";
+        window.location.href = `/Authentication/Frontend/html/pay.html?id=${houseId}`;
       }
 
     function messageLandlord(adminId) {

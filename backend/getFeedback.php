@@ -4,7 +4,7 @@
 header('Content-Type: application/json');
 include'../Config/db.php'; // Adjust path if needed
 
-$sql = "SELECT feedback.message, feedback.created_at, users.name 
+$sql = "SELECT feedback.id, feedback.message, feedback.created_at, users.name 
         FROM feedback 
         INNER JOIN users ON feedback.user_id = users.id 
         ORDER BY feedback.created_at DESC";
@@ -21,3 +21,4 @@ if ($result && $result->num_rows > 0) {
 echo json_encode($feedbacks);
 $conn->close();
 ?>
+
