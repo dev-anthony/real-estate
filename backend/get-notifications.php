@@ -15,6 +15,9 @@ $sql = "SELECT id, message, is_read, created_at
         ORDER BY created_at DESC";
 
 $stmt = $conn->prepare($sql);
+if($stmt === false){
+    die("error fetching:". $conn->error);
+}
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();

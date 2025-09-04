@@ -46,6 +46,9 @@ $sql = "
 ";
 
 $stmt = $conn->prepare($sql);
+if($stmt === false){
+    die("error fetching:". $conn->error);
+}
 $stmt->bind_param("isis", $logged_in_id, $logged_in_type, $logged_in_id, $logged_in_type);
 $stmt->execute();
 $result = $stmt->get_result();

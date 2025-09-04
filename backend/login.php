@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['signin'])) {
         // Admin found, verify password
         $admin = $admin_result->fetch_assoc();
         if (password_verify($password, $admin['password'])) {
-            $_SESSION['admin_email'] = $admin['email'];
+            $_SESSION['user_email'] = $admin['email'];
             $_SESSION['user_id'] = $admin['id']; //i did this because i have one backend for the chat system and we need to check who is logged in... to determine who is the sender and who is the receiver.
             //i needed a script that retrives the user id and  type based on their session or login or auth token. 
             $_SESSION['admin_id'] = $admin['id']; 

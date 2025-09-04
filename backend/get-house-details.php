@@ -35,6 +35,9 @@ $sql = "SELECT
             houses.id = ?";
 // $sql = "SELECT * FROM houses WHERE id = ?";
 $stmt = $conn->prepare($sql);
+if($stmt === false){
+    die("error fetching:". $conn->error);
+}
 $stmt->bind_param("i", $id);
 $stmt->execute();
  $result = $stmt->get_result();

@@ -21,7 +21,9 @@
         if (data.error) {
           console.log(data.error);
         }else if(!data.length){
-          document.createElement('p').innerHTML = 'No notification has been sent to you yet.';
+          // document.createElement('p').innerHTML = 'No notification has been sent to you yet.';
+        const message =  document.getElementById('notification-div')
+        message.innerHTML = 'No notification has been sent to you yet.'
         } else {
          const notificationDiv =  document.getElementById('notification-div')
          notificationDiv.innerHTML = "";

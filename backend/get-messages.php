@@ -25,6 +25,9 @@ try {
             ORDER BY timestamp ASC";
 
     $stmt = $conn->prepare($sql);
+    if($stmt === false){
+        die("error fetching:". $conn->error);
+    }
     $stmt->bind_param("iiii", $user_id, $admin_id, $admin_id, $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
