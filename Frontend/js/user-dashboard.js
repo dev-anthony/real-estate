@@ -1,3 +1,10 @@
+fetch("/Authentication/backend/get-anyuser-info.php")
+.then(res=>res.json())
+.then((data)=>{console.log(data)
+const user = document.getElementById('user')
+user.innerText = `Welcome ${data.user_name}!`});
+
+
 let houseData = [];
 
 function loadHouses(){
@@ -9,7 +16,7 @@ function loadHouses(){
   });
 }
 loadHouses();
-setInterval(loadHouses, 2000);
+// setInterval(loadHouses, 2000);
 
 function displayHouses(houses) {
   const container = document.getElementById("house-list");
@@ -30,7 +37,7 @@ function displayHouses(houses) {
       <div class="card-contents">
       <div class="flex">
       <h3>${house.title}, ${house.location}</h3>
-      <span class="price">$${house.price}</span>
+      <span class="price">₦${house.price}</span>
       </div>
       <p class="details">${house.description}</p>
       <a href="/Authentication/Frontend/php/house-details.php?id=${house.id}">View Details</a>

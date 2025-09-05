@@ -26,7 +26,7 @@ function displayHouses(houses) {
       <div class="card-contents">
       <div class="flex">
       <h3>${house.title}, ${house.location}</h3>
-      <span class="price">$${house.price}</span>
+      <span class="price">₦${house.price}</span>
       </div>
       <p class="details">${house.description}</p>
       <a href="/Authentication/Frontend/php/index.php">View Details</a>

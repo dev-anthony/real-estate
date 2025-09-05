@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['signin'])) {
             //i needed a script that retrives the user id and  type based on their session or login or auth token. 
             $_SESSION['admin_id'] = $admin['id']; 
             $_SESSION['user_type'] = 'admin';
+            $_SESSION['user_name'] = $admin['name'];
             
             header("Location: /Authentication/Frontend/php/admin_dashboard.php");
             exit();
@@ -68,6 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['signin'])) {
             $_SESSION['user_email'] = $user['email'];
             $_SESSION['user_id'] = $user['id']; 
             $_SESSION['user_type'] = 'user'; 
+            $_SESSION['user_name'] = $user['name'];
 
             header("Location: /Authentication/Frontend/php/userdashboard.php");
             exit();

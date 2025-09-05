@@ -26,7 +26,7 @@
 
         <div class="main">
             <header>
-               <div class="text"> <h2>Welcome!</h2>
+               <div class="text"> <h2 id="user"></h2>
                 <div class="search-container">
                 <input type="text" id="searchInput">
                 <button id="search-btn">Find Your <i class="fa-solid fa-house"></i></button>

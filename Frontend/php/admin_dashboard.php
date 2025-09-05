@@ -101,7 +101,8 @@
   }
   
   .edit-btn {
-    background-color: #6c63ff;
+    background-color: #3f23b1;
+    
     color: white;
   }
   
@@ -110,80 +111,110 @@
   }
   
   .delete-btn {
-    background-color: #ff4d4f;
+    /* background-color: #ff4d4f; */
+    background-color: #000000;
     color: white;
   }
   
   .delete-btn:hover {
     background-color: #d9363e;
   }
+  .search-stuff{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+ .responsive{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; 
+    width:100%;
+}
+
+@media (max-width: 768px){
+  .responsive{
+    display: flex;
+  flex-direction:column;
+  
+}
+}
   
     </style>
 </head>
 <body>
   
-    <div class="dashboard">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <h2>La Maison <i class="fa-solid fa-house"></i></h2>
-            <a href="#" class="nav-link">Dashboard</a>
-            <a href="/Authentication/Frontend/html/properties.html" class="nav-link">Properties</a>
-            <a href="/Authentication/Frontend/html/application.html" class="nav-link">Applications</a>
-            <a href="/Authentication/Frontend/php/admin-inbox.php" class="nav-link">Messages</a>
-            <a href="/Authentication/Frontend/php/add-admin.php" class="nav-link">Add Admin</a>
-            <a href="/Authentication/backend/logout.php" class="nav-link" id="logout" class="logout">Logout</a>
-        </aside>
+<div class="dashboard">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+      <h2>La Maison <i class="fa-solid fa-house"></i></h2>
+      <a href="#" class="nav-link">Dashboard</a>
+      <a href="/Authentication/Frontend/html/properties.html" class="nav-link">Properties</a>
+      <a href="/Authentication/Frontend/html/application.html" class="nav-link">Applications</a>
+      <a href="/Authentication/Frontend/php/admin-inbox.php" class="nav-link">Messages</a>
+      <a href="/Authentication/Frontend/php/add-admin.php" class="nav-link">Add Admin</a>
+      <a href="/Authentication/backend/logout.php" class="nav-link" id="logout" class="logout">Logout</a>
+  </aside>
 
-        <div class="main-content">
-             <!-- Topbar -->
-            <div class="topbar">
-                <div class="search-bar-button-con">
-                <div class="search-bar">
-                    <input  id="searchInput" type="text" placeholder="Search properties..." />
-                </div>
-                <button id="search-btn">Search</button>
-                </div>
-                <button id="menubutton">
-                  <i class="fa fa-bars" ></i>
-                </button>
-            </div>
-
-            <div class="text">
-                <h2>Properties</h2>
-                <a href="/Authentication/Frontend/html/admin-add-house.html">Add Property <i class="fa fa-plus"></i></a>
-            </div>
-
-           <div class="house-section">
-           <div class="house-list" id="house-list"></div>
-           </div>
-                        <!-- Edit House Modal -->
-              <div id="editModal" class="modal">
-                <div class="modal-content">
-                  <span class="close" onclick="closeModal()">&times;</span>
-                  <h3>Edit House</h3>
-                  <form id="editHouseForm">
-                    <input type="hidden" id="editHouseId">
-
-                    <label>Title</label>
-                    <input type="text" id="editTitle" required>
-
-                    <label>Price</label>
-                    <input type="number" id="editPrice" required>
-
-                    <label>Location</label>
-                    <input type="text" id="editLocation" required>
-
-                    <label>Description</label>
-                    <textarea id="editDescription" rows="3" required></textarea>
-
-                    <button type="submit" class="btn edit-btn">Save Changes</button>
-                  </form>
-                </div>
-              </div>
-
+<div class="main-content">
+    <!-- Topbar -->
+  <div class="topbar">
+    <div class="responsive">
+      <h3 id="user"></h3>
+      <div class="search-stuff">
+        <div class="search-bar">
+          <input  id="searchInput" type="text" placeholder="Search properties..." />
         </div>
+        <button id="search-btn">Search</button>
+      </div>
     </div>
+    <button id="menubutton">
+      <i class="fa fa-bars" ></i>
+    </button>
+  </div>
+
+              
+  <div class="text">
+      <h2>Properties</h2>
+      <a href="/Authentication/Frontend/html/admin-add-house.html">Add Property <i class="fa fa-plus"></i></a>
+  </div>
+
+  <div class="house-section">
+  <div class="house-list" id="house-list"></div>
+  </div>
+
+  <!-- Edit House Modal -->
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h3>Edit House</h3>
+      <form id="editHouseForm">
+        <input type="hidden" id="editHouseId">
+
+        <label>Title</label>
+        <input type="text" id="editTitle" required>
+
+        <label>Price</label>
+        <input type="number" id="editPrice" required>
+
+        <label>Location</label>
+        <input type="text" id="editLocation" required>
+
+        <label>Description</label>
+        <textarea id="editDescription" rows="3" required></textarea>
+
+        <button type="submit" class="btn edit-btn">Save Changes</button>
+      </form>
+    </div>
+  </div>
+
+  </div>
+</div>
 <script>
+    fetch("/Authentication/backend/get-anyuser-info.php")
+    .then(res=>res.json())
+    .then((data)=>{console.log(data)
+    const user = document.getElementById('user')
+    user.innerText = `Welcome ${data.user_name}!`});
 
   let houseData = [];
 
